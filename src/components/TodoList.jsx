@@ -118,7 +118,25 @@ const TodoList = () => {
         </div>
       </div>
 
-      <div className="row text-center mt-5 content"></div>
+      <div className="row text-center mt-5 content">
+      {filteredTasks.map(task => (
+          <div key={task.id} className="col-md-4 text-start box   "   >
+           <p> <strong> Name : {task.name}</strong></p> 
+           <p><strong> Description :  {task.description}</strong></p>
+            
+           <p><strong>Status <select className='colorred'
+              value={task.completed ? 'completed' : 'not_completed'}
+              onChange={(e) => handleToggleComplete(task.id, e.target.value === 'completed')}>
+              <option value="not_completed"  >Not Completed</option>
+              <option value="completed">Completed</option>
+            </select>
+            </strong></p>
+
+            <button className="btn btn-success h1 m-1 " onClick={() => handleEditClick(task)}>Edit</button>
+            <button className="btn btn-danger h1 m-1"  onClick={() => handleDeleteTask(task.id)}>Delete</button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
